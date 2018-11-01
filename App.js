@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button } from 'react-native';
+import { StyleSheet, FlatList, Text, View, ScrollView, TextInput, Button } from 'react-native';
 import ListItem from './src/components/ListItem';
 
 export default class App extends React.Component {
@@ -19,7 +19,7 @@ export default class App extends React.Component {
 
     this.setState(prevState => {
       return {
-        arr: prevState.arr.concat(this.state.value),
+        arr: prevState.arr.concat({ value: this.state.value, key: String(prevState.arr.length + 1) }),
       }
     });
   };
@@ -27,20 +27,12 @@ export default class App extends React.Component {
   removeElementHandler = (id) => {
     this.setState(prevState => {
       return {
-        arr: prevState.arr.filter((item, index) => index !== id),
+        arr: prevState.arr.filter((item) => item.key !== id),
       };
     })
   }
 
   render() {
-    const list = this.state.arr.map((content, index) => (
-      <ListItem
-        key={index}
-        content={content}
-        onPress={() => this.removeElementHandler(index)}
-      />
-    ));
-
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
@@ -58,7 +50,15 @@ export default class App extends React.Component {
         </View>
 
         <ScrollView style={styles.list}>
-          { list }
+          <FlatList
+            data={this.state.arr}
+            renderItem={({item}) => (
+              <ListItem
+                content={item.value}
+                onPress={() => this.removeElementHandler(item.key)}
+              />
+            )}
+          />
         </ScrollView>
       </View>
     );
