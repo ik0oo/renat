@@ -12,7 +12,7 @@ export default class App extends React.Component {
     this.setState({ value });
   };
 
-  submitHandler = () => {
+  addElementHandler = () => {
     if (this.state.value.trim() === '') {
       return;
     }
@@ -24,12 +24,20 @@ export default class App extends React.Component {
     });
   };
 
+  removeElementHandler = (id) => {
+    this.setState(prevState => {
+      return {
+        arr: prevState.arr.filter((item, index) => index !== id),
+      };
+    })
+  }
+
   render() {
     const list = this.state.arr.map((content, index) => (
       <ListItem
         key={index}
         content={content}
-        onPress={() => { alert(`selected id - ${index}`); }}
+        onPress={() => this.removeElementHandler(index)}
       />
     ));
 
@@ -45,11 +53,11 @@ export default class App extends React.Component {
           <Button
             style={styles.button}
             title="Add"
-            onPress={this.submitHandler}
+            onPress={this.addElementHandler}
           />
         </View>
 
-        <View>
+        <View style={styles.list}>
           { list }
         </View>
       </View>
@@ -61,18 +69,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 26,
-    backgroundColor: '#fff',
+    backgroundColor: '#888',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
   inputContainer: {
+    width: '100%',
+    backgroundColor: '#ccc',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 10,
   },
   input: {
     flex: 2,
+    padding: 3,
+    paddingLeft: 15,
   },
   button: {
     flex: 1,
+  },
+  list: {
+    width: '100%',
   }
 });
