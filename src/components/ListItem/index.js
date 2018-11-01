@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-export default ({ content, onPress }) => (
-    <TouchableOpacity onPress={onPress}>
+export default ({ content, onPressItem }) => (
+    <TouchableOpacity onPress={onPressItem}>
         <View style={styles.item}>
             <Text style={{fontSize: 20}}>{content}</Text>
         </View>

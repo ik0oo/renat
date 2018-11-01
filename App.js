@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, FlatList, Text, View, ScrollView, TextInput, Button } from 'react-native';
 import ListItem from './src/components/ListItem';
+import PlaceList from './src/components/PlaceList';
+import PlaceInput from './src/components/PlaceInput';
 
 export default class App extends React.Component {
   state = {
@@ -35,31 +37,15 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            value={this.state.value}
-            style={styles.input}
-            onChangeText={this.onChangeInput}
-            placeholder="input your text here"
-          />
-          <Button
-            style={styles.button}
-            title="Add"
-            onPress={this.addElementHandler}
-          />
-        </View>
-
-        <ScrollView style={styles.list}>
-          <FlatList
-            data={this.state.arr}
-            renderItem={({item}) => (
-              <ListItem
-                content={item.value}
-                onPress={() => this.removeElementHandler(item.key)}
-              />
-            )}
-          />
-        </ScrollView>
+        <PlaceInput
+          onChangeInput={this.onChangeInput}
+          onPressButton={this.addElementHandler}
+          value={this.state.value}
+        />
+        <PlaceList
+          itemList={this.state.arr}
+          onPressItem={(id) => this.removeElementHandler(id)}
+        />
       </View>
     );
   }
@@ -73,21 +59,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  inputContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  input: {
-    flex: 2,
-    padding: 3,
-    paddingLeft: 15,
-  },
-  button: {
-    flex: 1,
-  },
-  list: {
-    width: '100%',
-  }
 });
