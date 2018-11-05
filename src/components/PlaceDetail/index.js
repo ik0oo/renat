@@ -5,7 +5,7 @@ const PlaceDetail =  ({ data, onClose, onDelete }) => {
   const modalContent = !!data && (
     <View>
       <Image source={data.image} style={styles.image} />
-      <Text style={styles.name}>{data.value}</Text>
+      <Text style={styles.name}>{data.name}</Text>
     </View>
   );
 

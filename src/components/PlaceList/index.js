@@ -8,7 +8,7 @@ const PlaceList = ({ itemList, onPressItem }) => (
       data={itemList}
       renderItem={({item}) => (
         <ListItem
-          content={item.value}
+          content={item.name}
           onPressItem={() => onPressItem(item.key)}
         />
       )}

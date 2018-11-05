@@ -7,24 +7,19 @@ import PlaceDetail from './src/components/PlaceDetail';
 
 export default class App extends React.Component {
   state = {
-    value: '',
     arr: [],
     selected: null,
   };
 
-  onChangeInput = (value) => {
-    this.setState({ value });
-  };
-
-  addElementHandler = () => {
-    if (this.state.value.trim() === '') {
+  addElementHandler = (name) => {
+    if (name.trim() === '') {
       return;
     }
 
     this.setState(prevState => {
       return {
         arr: prevState.arr.concat({
-          value: this.state.value,
+          name,
           key: String(prevState.arr.length + 1),
           image: {
             uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Hanalai_Beach_is_a_cool_place_to_hang_out_%288034645668%29.jpg'
@@ -63,9 +58,7 @@ export default class App extends React.Component {
           onDelete={this.onDeleteElementHandler}
         />
         <PlaceInput
-          onChangeInput={this.onChangeInput}
           onPressButton={this.addElementHandler}
-          value={this.state.value}
         />
         <PlaceList
           itemList={this.state.arr}
