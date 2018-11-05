@@ -1,7 +1,3 @@
-/** @format */
-
-import {AppRegistry} from 'react-native';
-import {name as appName} from './app.json';
 import { Navigation } from 'react-native-navigation';
 import AuthScreen from './src/screens/AuthScreen';
 import SignIn from './src/screens/SignIn';
@@ -20,7 +16,7 @@ const rootComponent = {
       }
     }
   }
-}
+};
 
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
