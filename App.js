@@ -7,7 +7,7 @@ import PlaceDetail from './src/components/PlaceDetail';
 
 export default class App extends React.Component {
   state = {
-    arr: [],
+    places: [],
     selected: null,
   };
 
@@ -18,9 +18,9 @@ export default class App extends React.Component {
 
     this.setState(prevState => {
       return {
-        arr: prevState.arr.concat({
+        places: prevState.places.concat({
           name,
-          key: String(prevState.arr.length + 1),
+          key: String(prevState.places.length + 1),
           image: {
             uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Hanalai_Beach_is_a_cool_place_to_hang_out_%288034645668%29.jpg'
           },
@@ -32,7 +32,7 @@ export default class App extends React.Component {
   selectElementHandler = key => {
     this.setState(prevState => {
       return {
-        selected: prevState.arr.find(item => item.key === key),
+        selected: prevState.places.find(item => item.key === key),
       }
     })
   }
@@ -44,7 +44,7 @@ export default class App extends React.Component {
   onDeleteElementHandler = (key) => {
     this.setState(prevState => {
       return {
-        arr: prevState.arr.filter((item) => item.key !== key),
+        places: prevState.places.filter((item) => item.key !== key),
       };
     }, this.onCloseModalHandler)
   }
@@ -61,7 +61,7 @@ export default class App extends React.Component {
           onPressButton={this.addElementHandler}
         />
         <PlaceList
-          itemList={this.state.arr}
+          itemList={this.state.places}
           onPressItem={(key) => this.selectElementHandler(key)}
         />
       </View>
