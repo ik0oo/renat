@@ -10,9 +10,17 @@ export default class PlaceInput extends Component {
     this.setState({ value });
   };
 
-  render() {
-    const { onPressButton } = this.props;
+  onPressButton = () => {
+    const { value } = this.state;
+    if (value.trim() === '') {
+      return;
+    }
 
+    this.props.onPressButton(value);
+    this.setState({ value: '' });
+  }
+
+  render() {
     return (
       <View style={styles.inputContainer}>
         <TextInput
@@ -24,7 +32,7 @@ export default class PlaceInput extends Component {
         <Button
           style={styles.button}
           title="Add"
-          onPress={() => onPressButton(this.state.value)}
+          onPress={this.onPressButton}
         />
       </View>
     );

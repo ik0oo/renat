@@ -3,7 +3,7 @@ import {
   DELETE_PLACE,
   SELECT_PLACE,
   DESELECT_PLACE,
-} from '../action/actionTypes';
+} from '../actions/actionTypes';
 
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
   selected: null,
 };
 
-cont reducer = (state, action) => {
+const reducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_PLACE: {
       return {
