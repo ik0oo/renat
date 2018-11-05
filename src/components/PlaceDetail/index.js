@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Modal, View, Text, Image, Button, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 const PlaceDetail =  ({ data, onClose, onDelete }) => {
   const modalContent = !!data && (
@@ -23,7 +22,6 @@ const PlaceDetail =  ({ data, onClose, onDelete }) => {
 
           <TouchableOpacity style={styles.deleteButtonContainer} onPress={() => onDelete(data.key)}>
             <View style={styles.deleteButton}>
-              <Icon name="ios-trash" size={30} color="red" />
               <Text style={styles.deleteButtonText}>Delete</Text>
             </View>
           </TouchableOpacity>
