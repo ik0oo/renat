@@ -3,11 +3,13 @@ import { StyleSheet, FlatList, Text, View, ScrollView, TextInput, Button } from 
 import ListItem from './src/components/ListItem';
 import PlaceList from './src/components/PlaceList';
 import PlaceInput from './src/components/PlaceInput';
+import PlaceDetail from './src/components/PlaceDetail';
 
 export default class App extends React.Component {
   state = {
     value: '',
     arr: [],
+    selected: null,
   };
 
   onChangeInput = (value) => {
@@ -21,22 +23,45 @@ export default class App extends React.Component {
 
     this.setState(prevState => {
       return {
-        arr: prevState.arr.concat({ value: this.state.value, key: String(prevState.arr.length + 1) }),
+        arr: prevState.arr.concat({
+          value: this.state.value,
+          key: String(prevState.arr.length + 1),
+          image: {
+            uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Hanalai_Beach_is_a_cool_place_to_hang_out_%288034645668%29.jpg'
+          },
+        }),
       }
     });
   };
 
-  removeElementHandler = (id) => {
+  selectElementHandler = key => {
     this.setState(prevState => {
       return {
-        arr: prevState.arr.filter((item) => item.key !== id),
-      };
+        selected: prevState.arr.find(item => item.key === key),
+      }
     })
+  }
+
+  onCloseModalHandler = () => {
+    this.setState({ selected: null });
+  };
+
+  onDeleteElementHandler = (key) => {
+    this.setState(prevState => {
+      return {
+        arr: prevState.arr.filter((item) => item.key !== key),
+      };
+    }, this.onCloseModalHandler)
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <PlaceDetail
+          data={this.state.selected}
+          onClose={this.onCloseModalHandler}
+          onDelete={this.onDeleteElementHandler}
+        />
         <PlaceInput
           onChangeInput={this.onChangeInput}
           onPressButton={this.addElementHandler}
@@ -44,7 +69,7 @@ export default class App extends React.Component {
         />
         <PlaceList
           itemList={this.state.arr}
-          onPressItem={(id) => this.removeElementHandler(id)}
+          onPressItem={(key) => this.selectElementHandler(key)}
         />
       </View>
     );
