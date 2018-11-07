@@ -1,11 +1,24 @@
+// libs
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 
-export default class SharePlace extends Component {
+// utils
+import { mapDispatchToProps } from '../../redux.utils';
+
+// components
+import PlaceInput from '../../components/PlaceInput';
+
+// dispatchers
+import { addPlace } from '../../store/actions';
+
+@mapDispatchToProps(dispatch => ({
+  onAddPlace: (name) => dispatch(addPlace(name))
+}))
+export default class SharePlaceScreen extends Component {
   render() {
     return (
       <View style={style.container}>
-        <Text>Share Place Tab</Text>
+        <PlaceInput onPlaceAdded={this.props.onAddPlace} />
       </View>
     );
   }

@@ -1,11 +1,21 @@
+// libs
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 
-export default class FindPlace extends Component {
+// utils
+import { mapStateToProps } from '../../redux.utils';
+
+// components
+import PlaceList from '../../components/PlaceList';
+
+@mapStateToProps(state => ({
+  places: state.places.places,
+}))
+export default class FindPlaceScreen extends Component {
   render() {
     return (
       <View style={style.container}>
-        <Text>Find Place Tab</Text>
+        <PlaceList itemList={this.props.places} />
       </View>
     );
   }

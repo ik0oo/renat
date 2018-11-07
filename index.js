@@ -15,11 +15,11 @@ import SharePlace from './src/screens/SharePlace';
 
 const store = configureStore();
 
-Navigation.registerComponent(`app.AuthScreen`, () => AuthScreen, store, Provider);
-Navigation.registerComponent(`app.SignIn`, () => SignIn, store, Provider);
-Navigation.registerComponent(`app.SignUp`, () => SignUp, store, Provider);
-Navigation.registerComponent(`app.FindPlace`, () => FindPlace, store, Provider);
-Navigation.registerComponent(`app.SharePlace`, () => SharePlace, store, Provider);
+// Navigation.registerComponent(`app.AuthScreen`, () => AuthScreen, store, Provider);
+// Navigation.registerComponent(`app.SignIn`, () => SignIn, store, Provider);
+// Navigation.registerComponent(`app.SignUp`, () => SignUp, store, Provider);
+Navigation.registerComponentWithRedux(`app.FindPlace`, () => FindPlace, Provider, store);
+Navigation.registerComponentWithRedux(`app.SharePlace`, () => SharePlace, Provider, store);
 
 const bottomTab = ({name, text, icon, testID}) => ({
   component: {

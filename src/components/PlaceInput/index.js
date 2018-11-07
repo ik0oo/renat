@@ -16,9 +16,9 @@ export default class PlaceInput extends Component {
       return;
     }
 
-    this.props.onPressButton(value);
+    this.props.onPlaceAdded(value);
     this.setState({ value: '' });
-  }
+  };
 
   render() {
     return (
