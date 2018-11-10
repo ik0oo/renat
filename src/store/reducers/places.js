@@ -19,6 +19,7 @@ const reducer = (state = initialState, action) => {
         places: state.places.concat({
           name: action.placeName,
           key: String(state.places.length + 1),
+          id: String(state.places.length + 1),
           image: {
             uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Hanalai_Beach_is_a_cool_place_to_hang_out_%288034645668%29.jpg'
           },

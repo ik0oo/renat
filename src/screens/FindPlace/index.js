@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 
 // utils
 import { mapStateToProps } from '../../redux.utils';
+import { showPlaceDetails } from '../navigation';
 
 // components
 import PlaceList from '../../components/PlaceList';
@@ -13,9 +14,14 @@ import PlaceList from '../../components/PlaceList';
 }))
 export default class FindPlaceScreen extends Component {
   render() {
+    const getSelectedPlace = key => this.props.places.find(item => item.key === key);
+
     return (
       <View style={style.container}>
-        <PlaceList itemList={this.props.places} />
+        <PlaceList
+          itemList={this.props.places}
+          onPressItem={(key) => showPlaceDetails(this.props.componentId, getSelectedPlace(key))}
+        />
       </View>
     );
   }
