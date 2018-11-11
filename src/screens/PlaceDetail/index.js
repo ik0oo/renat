@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Navigation } from 'react-native-navigation';
 import { StyleSheet, Modal, View, Text, Image, Button, TouchableOpacity } from 'react-native';
 
 // utils
@@ -7,16 +8,13 @@ import { mapDispatchToProps } from '../../redux.utils';
 // actions
 import { deletePlace } from '../../store/actions';
 
-// navi
-import { pop } from '../navigation';
-
 @mapDispatchToProps(dispatch => ({
   onDelete: (key) => dispatch(deletePlace(key)),
 }))
 export default class PlaceDetail extends Component {
   onDeletePlaceHandler = () => {
     this.props.onDelete(this.props.id);
-    pop(this.props.componentId);
+    Navigation.pop(this.props.componentId);
   }
 
   render() {

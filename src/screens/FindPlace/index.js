@@ -1,13 +1,27 @@
 // libs
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 
 // utils
 import { mapStateToProps } from '../../redux.utils';
-import { showPlaceDetails } from '../navigation';
 
 // components
 import PlaceList from '../../components/PlaceList';
+
+const showPlaceDetails = (id, passProps) => Navigation.push(id, {
+  component: {
+    name: 'app.PlaceDetail',
+    passProps,
+    options: {
+      topBar: {
+        title: {
+          text: passProps.name
+        },
+      },
+    },
+  }
+})
 
 @mapStateToProps(state => ({
   places: state.places.places,
