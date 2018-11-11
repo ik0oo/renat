@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navigation } from 'react-native-navigation';
+import MapView from 'react-native-maps';
 import { StyleSheet, Modal, View, Text, Image, Button, TouchableOpacity } from 'react-native';
 
 // utils
@@ -25,6 +26,13 @@ export default class PlaceDetail extends Component {
             <Image source={this.props.image} style={styles.image} />
             <Text style={styles.name}>{this.props.name}</Text>
           </View>
+          <MapView
+            initialRegion={this.props.location}
+            region={this.props.location}
+            style={styles.map}
+          >
+            <MapView.Marker coordinate={this.props.location} />
+          </MapView>
           <View>
             <TouchableOpacity style={styles.deleteButtonContainer} onPress={this.onDeletePlaceHandler}>
               <View style={styles.deleteButton}>
@@ -62,5 +70,9 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 18,
     marginLeft: 10,
+  },
+  map: {
+    width: '100%',
+    height: 250
   }
 });

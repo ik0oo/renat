@@ -17,7 +17,7 @@ import PickImage from "../../components/PickImage";
 import { addPlace } from '../../store/actions';
 
 @mapDispatchToProps(dispatch => ({
-  onAddPlace: (name, location) => dispatch(addPlace(name, location))
+  onAddPlace: (name, location, image) => dispatch(addPlace(name, location, image))
 }))
 export default class SharePlaceScreen extends Component {
   static navigatorStyle = {
@@ -36,8 +36,12 @@ export default class SharePlaceScreen extends Component {
       },
       location: {
         value: null,
-        valid: true,
-      }
+        valid: false,
+      },
+      image: {
+        value: null,
+        valid: false,
+      },
     }
   };
 
@@ -57,7 +61,22 @@ export default class SharePlaceScreen extends Component {
     });
   };
 
+  imagePickedHandler = (image) => {
+    this.setState(prevState => {
+      return {
+        controls: {
+          ...prevState.controls,
+          image: {
+            value: image,
+            valid: true,
+          },
+        },
+      };
+    });
+  };
+
   pickLocationHandler = (location) => {
+    alert(location)
     this.setState(prevState => {
       return {
         controls: {
@@ -75,6 +94,7 @@ export default class SharePlaceScreen extends Component {
     this.props.onAddPlace(
       this.state.controls.placeName.value,
       this.state.controls.location.value,
+      this.state.controls.image.value,
     );
   };
 
@@ -85,7 +105,7 @@ export default class SharePlaceScreen extends Component {
         <MainText>
           <HeadingText>Share a Place with us!</HeadingText>
         </MainText>
-        <PickImage />
+        <PickImage onImagePicked={this.imagePickedHandler} />
         <PickLocation onLocationPick={this.pickLocationHandler} />
         <PlaceInput
             placeData={this.state.controls.placeName}

@@ -21,9 +21,7 @@ const reducer = (state = initialState, action) => {
           key: String(state.places.length + 1),
           id: String(state.places.length + 1),
           location: action.location,
-          image: {
-            uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Hanalai_Beach_is_a_cool_place_to_hang_out_%288034645668%29.jpg'
-          },
+          image: action.image,
         })
       }
     }
