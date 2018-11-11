@@ -68,10 +68,6 @@ class AuthScreen extends Component {
     });
   };
 
-  loginHandler = () => {
-    goHome();
-  };
-
   updateInputState = (key, value) => {
     let connectedValue = {};
     if (this.state.controls[key].validationRules.equalTo) {
@@ -131,7 +127,7 @@ class AuthScreen extends Component {
     return (
       <View style={styles.container}>
         {headingText}
-        <ButtonWithBackground color="#29aaf4" onPress={() => alert("Hello")}>
+        <ButtonWithBackground color="#29aaf4" onPress={goHome}>
           Switch to Login
         </ButtonWithBackground>
         <View style={styles.inputContainer}>
@@ -187,7 +183,7 @@ class AuthScreen extends Component {
         </View>
         <ButtonWithBackground
           color="#29aaf4"
-          onPress={this.loginHandler}
+          onPress={goHome}
           disabled={
             !this.state.controls.confirmPassword.valid ||
             !this.state.controls.email.valid ||
