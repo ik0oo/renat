@@ -22,7 +22,7 @@ const bottomTab = ({ name, text, icon, testID, menuButtonIcon }) => ({
             }, 
             leftButtons: [
               {
-                id: 'buttonOne',
+                id: 'SideMenuHomeButton',
                 icon: menuButtonIcon,
                 text: 'Menu',
               }
@@ -40,6 +40,7 @@ const sideMenuRoot = (component) => ({
       left: {
         component: {
           name: 'app.SideMenu',
+          id: 'SideMenuHomeRoot',
           passProps: {
             text: 'This is a left side menu screen'
           }
