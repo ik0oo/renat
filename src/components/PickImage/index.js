@@ -20,12 +20,12 @@ export default class PickImage extends Component {
       } else {
         this.setState({
           pickedImage: res,
-        })
-        this.props.onImagePicked(res);
+        });
+        this.props.onImagePicked({ uri: res.uri, base64: res.data });
       }
     });
   };
-  
+
   render() {
     return (
       <View style={styles.container}>

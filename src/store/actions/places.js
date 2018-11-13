@@ -11,15 +11,29 @@ export const addPlace = (placeName, location, image) => {
       name: placeName,
       location: location
     };
-    fetch("https://renat-47293.firebaseio.com/places.json", {
-      method: "POST",
-      body: JSON.stringify(placeData)
+    fetch('https://us-central1-renat-47293.cloudfunctions.net/storeImage', {
+      method: 'POST',
+      body: JSON.stringify({
+        image: image.base64,
+      })
     })
-      .catch(err => console.log(err))
+      .catch((err) => {
+        console.log(err);
+      })
       .then(res => res.json())
       .then(parsedRes => {
         console.log(parsedRes);
       });
+
+    // fetch("https://renat-47293.firebaseio.com/places.json", {
+    //   method: "POST",
+    //   body: JSON.stringify(placeData)
+    // })
+    //   .catch(err => console.log(err))
+    //   .then(res => res.json())
+    //   .then(parsedRes => {
+    //     console.log(parsedRes);
+    //   });
   };
 };
 
